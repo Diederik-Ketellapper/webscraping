@@ -1,5 +1,5 @@
 ---
-title: "README"
+title: "Memory of the Project"
 output: html_notebook
 ---
 
@@ -8,8 +8,18 @@ output: html_notebook
 
 This project aims to showcase the adquired skills during the course MAP 351 Introduction to R of the master's degree MSc Data Science for Business. The main goals of this project is to use and implement the different R capabilities shown in class, but at the same time develop a tool which may have some practical interest. In that sense the topic of the project was open, and we decided to go for online betting in Europe.
 
+With the following project we aim to cover the following points of the course:
+
++ Github: We are working online from Barcelona and Amsterdam)
++ Shiny app: the results will be showcased in a shiny app.
++ Web-scraping: use to collect odd data from the different websites.
++ Data Manipulating and presenting: when dealing with the data from the different websites.
++ Package making: the final result is pretended to be delivered as a package.
+
+# Introduction
+
 On the past few years, online betting has experienced a boom that has lead to proliferation of website offering this service. The question that arises is then, there is any difference across all the webistes regarding the odds? Or all of them offer the same odd for a given bet and the main difference might be other services the different portals offer?
 
 In order to give an answer to this question, the first thing to do is to analyze how odds are defined by bookmakers.
 
-# Introduction
+
