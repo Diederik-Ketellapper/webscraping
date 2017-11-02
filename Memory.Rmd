@@ -6,15 +6,7 @@ output: html_notebook
 ## The Big Ass Project: Webscraping
 # Preface
 
-This project aims to showcase the adquired skills during the course MAP 351 Introduction to R of the master's degree MSc Data Science for Business. The main goals of this project is to use and implement the different R capabilities shown in class, but at the same time develop a tool which may have some practical interest. In that sense the topic of the project was open, and we decided to go for online betting in Europe.
-
-With the following project we aim to cover the following points of the course:
-
-+ Github: We are working online from Barcelona and Amsterdam)
-+ Shiny app: the results will be showcased in a shiny app.
-+ Web-scraping: use to collect odd data from the different websites.
-+ Data Manipulating and presenting: when dealing with the data from the different websites.
-+ Package making: the final result is pretended to be delivered as a package.
+This project aims to showcase the adquired skills during the course MAP 351 Introduction to R of the master's degree MSc Data Science for Business. The main goals of this project is to use and implement the different R capabilities shown in class, but at the same time develop a tool which may have some practical interest. In that sense the topic of the project was open, and we decided to go for online betting in Europe. In this project we are going to use the decimal odds format, for more information about the different odds formats and what they mean the reader is encouraged to check: https://help.smarkets.com/hc/en-gb/articles/214071849-What-are-the-different-betting-odds-formats-
 
 # Introduction
 
@@ -34,7 +26,22 @@ With this being said, it can be seen that due to de odds defining process is unl
 
 In order to help the bettor to take a more informed decision and place the bet with the best odd available we will develop a shiny app comparing the data from the 5 principal betting websites in Europe that will allow comparisions between odds offered and the calculated bookmaker's margin.
 
-# 
+With the following project we aim to cover the following points of the course:
 
++ Github: We are working online from Barcelona and Amsterdam)
++ Shiny app: the results will be showcased in a shiny app.
++ Web-scraping: use to collect odd data from the different websites.
++ Data Manipulating and presenting: when dealing with the data from the different websites.
++ Package making: the final result is pretended to be delivered as a package.
+
+# Betting websites selection
+
+According to the following ranking (http://www.infobookmakers2017.com/european-betting-sites.html) the main European betting sites are the following:
+
++ BET365 with the following URL: https://www.bet365.es/#/HO/
++ WILLIAM HILL with the following URL: http://sports.williamhill.es/bet_esp/es
++ BETFAIR with the following URL: https://www.betfair.es/sport/
++ 10BET with the following URL: https://www.10bet.com/sports/
++ UNIBET with the following URL: https://www.unibet.co.uk/betting#home (input bar to insert team)
 
 
