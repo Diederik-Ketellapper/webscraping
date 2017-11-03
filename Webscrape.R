@@ -2,21 +2,32 @@
 library(rvest)
 library(tidyverse)
 
+### This one is easiest website to scrape
+### We still need to do some data manipulation though
 html<- read_html("http://sports.williamhill.es/bet_esp/es/betting/t/295/Inglaterra+-+Premier+League.html")
 matches<- html %>% 
   html_nodes('.rowOdd a span') %>% 
-  html_text()
+  html_text() 
 
 prices<- html %>% 
 html_nodes('.eventprice') %>% 
-html_text()
+html_text() %>% 
+as.numeric
 prices
 
-
+### This one is harder, for some reason the odds are not scraped. 
+### However I can copy them with my mouse so there is text somewhere...
 html <- read_html("https://www.10bet.com/sports/football/england-premier-league/")
 bet_10 <- html %>% 
   html_nodes('#bra_1 span') %>% 
 html_text()
+bet_10
+
+html <- read_html("https://www.10bet.com/sports/football/england-premier-league/")
+bet_10 <- html %>% 
+  html_nodes(xpath='//*[@id="wlg_40253"]') %>% 
+  html_text()
+gsub("[^0-9\\.]", "",bet_10) 
 bet_10
 
 tix_link = paste("https://seatgeek.com/new-york-knicks-tickets#events")
