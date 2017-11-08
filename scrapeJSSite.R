@@ -1,8 +1,9 @@
-
+library(glue)
 options(stringsAsFactors = FALSE)
 require(rvest)
 
   ## change Phantom.js scrape file
+  team <- "ajax"
   url <- glue("https://www.unibet.co.uk/betting#filter/football/all/all/{team}") %>% as.character()
   lines <- readLines("scrape_final.js")
   lines[1] <- paste0("var url ='", url ,"';")

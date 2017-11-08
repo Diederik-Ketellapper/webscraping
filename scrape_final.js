@@ -1,4 +1,4 @@
-var url ='https://www.unibet.co.uk/betting#filter/football/all/all/ajax';
+var url ='https://sports.bwin.com/en/sports/search?query=barcelona';
 var page = new WebPage()
 var fs = require('fs');
 
