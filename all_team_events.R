@@ -9,19 +9,26 @@
 library(tidyverse)
 library(jsonlite)
 library(rvest)
-library(glue)
 library(httr)
 library(dplyr)
 library(assertthat)
 
 ## We define the function to gather all the data from the different websites:
 
-all_team_events <- function(team){
+#all_team_events <- function(team){
   
-  #assertthat
+  #assertthat this has to be a character
   
   ## Now we are going to use the functions created separately to gather the data from each one:
   
-  df_unibet <- unibet_events(team)
+  df_williamhill <- williamhill_events()
+  df_bwin <- bwin_events()
+  df_unibet <- unibet_events()
+  df_betstars <- betstars_events()
   
-}
+  ## We bind all the dataframes in a unique one:
+  
+  df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars)
+  
+  
+#}
