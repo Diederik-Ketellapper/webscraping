@@ -38,7 +38,7 @@ library(assertthat)
   oddh <- odds[seq(1,length(odds),3)]
   oddd <- odds[seq(2,length(odds),3)]
   oddv <- odds[seq(3,length(odds),3)]
-  website <- rep("william hill", each = length(matches))
+  website <- rep("bet365", each = length(matches))
   
   df <- data.frame(home, visitor, oddh, oddd, oddv,website)
   return(df)
