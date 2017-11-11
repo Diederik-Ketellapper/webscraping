@@ -6,34 +6,26 @@
 #
 #    http://shiny.rstudio.com/
 #
-
+library(tidyverse)
 library(shiny)
 
+source("tests.R")
+options(stringsAsFactors = FALSE)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-  selectInput("variable", "Variable:",
-              list(`Eredivisie` = c("ADO Den Haag",
-                                    "AFC Ajax",
-                                    "AZ Alkmaar",
-                                    "SBV Excelsior",
-                                    "Feyenoord",
-                                    "FC Groningen",
-                                    "SC Heerenveen",
-                                    "Heracles Almelo",
-                                    "NAC Breda",
-                                    "PEC Zwolle",
-                                    "PSV Eindhoven",
-                                    "Roda JC Kerkrade",
-                                    "Sparta Rotterdam",
-                                    "FC Twente",
-                                    "FC Utrecht",
-                                    "Vitesse",
-                                    "VVV-Venlo",
-                                    "Willem II"),
-                   `West Coast` = c("WA", "OR", "CA"),
-                   `Midwest` = c("MN", "WI", "IA"))),
-  tableOutput("data")
-)
+  
+titlePanel("Which site to bet on for your favorite team?"),
+
+helpText('By: Eric Brea and Diederik Ketellapper '),
+
+sidebarPanel(selectInput("Paris Saint-Germain", "Team:",
+              list(`Ligue1` = ligue1))),
+mainPanel(
+  tabsetPanel(
+    tabPanel("Plot", tableOutput("data")), 
+    tabPanel("Link"), wellPanel(helpText(a("Click here to bet for your best odds",href="http://www.google.com", target="_blank")))
+)))
+
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   output$data <- renderTable({iris
