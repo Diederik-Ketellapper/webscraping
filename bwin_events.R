@@ -13,8 +13,6 @@ library(assertthat)
 
 bwin_events <- function(){
   
-  #assert_that(is.character(team))
-  
   html<- read_html("https://sports.bwin.es/es/sports/search?query=Ligue%201")
   
   matches <- html %>% html_nodes('.mb-option-button--3-way .mb-option-button__option-name') %>% html_text()

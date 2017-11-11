@@ -11,9 +11,7 @@ library(assertthat)
 
 ## Build the function for William Hill, here we will webscrapp all the matches for the Ligue 1:
 
-williamhill_events <- function(team){
-
-#assert_that(is.character(team))
+williamhill_events <- function(){
 
 html<- read_html("http://sports.williamhill.es/bet_esp/es/betting/t/312/Francia+-+Ligue+1.html")
 
