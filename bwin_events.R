@@ -1,4 +1,4 @@
-#### WEB SCRAPPING FUNCTION FOR UNIBET####
+#### WEB SCRAPPING FUNCTION FOR BWIN ####
 
 # Load and install the necessary packages:
 
@@ -11,8 +11,8 @@ library(dplyr)
 library(assertthat)
 
 ## Build the function for Unibet:
-
-unibet_events <- function(team){
+team <- "real%20madrid"
+#bwin_events <- function(team){
   
   #assert_that(is.character(team))
   
@@ -20,7 +20,7 @@ unibet_events <- function(team){
   require(rvest)
   
   ## change Phantom.js scrape file
-  url <- glue("https://www.unibet.co.uk/betting#filter/football/all/all/{team}") %>% as.character()
+  url <- glue("https://sports.bwin.com/es/sports/search?query={team}") %>% as.character()
   lines <- readLines("scrape_final.js")
   lines[1] <- paste0("var url ='", url ,"';")
   writeLines(lines, "scrape_final.js")
@@ -30,8 +30,8 @@ unibet_events <- function(team){
   
   ## Now we scrape matches and odds from the downloaded website:
   html <- read_html("1.html")
-  matches <- html %>% html_nodes(".KambiBC-event-participants__name") %>% html_text()
-  odds <- html %>% html_nodes(".KambiBC-bet-offer--outcomes-3 .KambiBC-mod-outcome__odds") %>% html_text()
+  matches <- html %>% html_nodes(".mb-option-button--3-way .mb-option-button__option-name--odds-4 , .mb-option-button--3-way .highlight , .mb-option-button--3-way .mb-option-button__option-name--odds-5") %>% html_text()
+  odds <- html %>% html_nodes(".marketboard-options-row--3-way .mb-option-button__option-odds") %>% html_text()
   
   ## Now we create a dataframe with the needed data:
   match <- 1:1:(length(matches)/2)
@@ -40,9 +40,9 @@ unibet_events <- function(team){
   oddh <- odds[seq(1,length(odds),3)]
   oddd <- odds[seq(2,length(odds),3)]
   oddv <- odds[seq(3,length(odds),3)]
-  website <- rep("unibet", each = length(match))
+  website <- rep("bwin", each = length(match))
   
   df <- data.frame(match, home, visitor, oddh, oddd, oddv,website)
   
   return(df)
-}
+#}
