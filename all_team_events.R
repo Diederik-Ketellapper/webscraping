@@ -20,7 +20,11 @@ library(assertthat)
   #assertthat this has to be a character
   
   ## Now we are going to use the functions created separately to gather the data from each one:
-  
+"williamhill_events.R" %>% source
+"bwin_events.R" %>% source
+"unibet_events.R" %>% source
+"betstars_events.R" %>% source
+
   df_williamhill <- williamhill_events()
   df_bwin <- bwin_events()
   df_unibet <- unibet_events()
