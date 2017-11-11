@@ -5,19 +5,22 @@
 library(tidyverse)
 library(jsonlite)
 library(rvest)
+library(glue)
 library(httr)
 library(dplyr)
 library(assertthat)
 
 ## Build the function for Unibet:
 
-#unibet_events <- function(){
-
+unibet_events <- function(team){
+  
+  #assert_that(is.character(team))
+  
   options(stringsAsFactors = FALSE)
   require(rvest)
   
   ## change Phantom.js scrape file
-  url <- "https://www.unibet.co.uk/betting#filter/football/france/ligue_1" %>% as.character()
+  url <- glue("https://www.unibet.co.uk/betting#filter/football/all/all/{team}") %>% as.character()
   lines <- readLines("scrape_final.js")
   lines[1] <- paste0("var url ='", url ,"';")
   writeLines(lines, "scrape_final.js")
@@ -27,8 +30,8 @@ library(assertthat)
   
   ## Now we scrape matches and odds from the downloaded website:
   html <- read_html("1.html")
-  matches <- html %>% html_nodes('.KambiBC-event-participants__name') %>% html_text()
-  odds <- html %>% html_nodes('.KambiBC-bet-offer--outcomes-3 .KambiBC-mod-outcome__odds') %>% html_text() %>% as.numeric
+  matches <- html %>% html_nodes(".KambiBC-event-participants__name") %>% html_text()
+  odds <- html %>% html_nodes(".KambiBC-bet-offer--outcomes-3 .KambiBC-mod-outcome__odds") %>% html_text()
   
   ## Now we create a dataframe with the needed data:
   match <- 1:1:(length(matches)/2)
@@ -42,4 +45,4 @@ library(assertthat)
   df <- data.frame(match, home, visitor, oddh, oddd, oddv,website)
   
   return(df)
-#}
+}
