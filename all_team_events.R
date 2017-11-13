@@ -11,7 +11,6 @@ library(jsonlite)
 library(rvest)
 library(httr)
 library(dplyr)
-library(assertthat)
 
 ## We define the function to gather all the data from the different websites:
 
@@ -34,5 +33,14 @@ library(assertthat)
   
   df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars)
   
-  
+  ## We replace all the scrapped names in the data frame for the correct ones:
+  for (i in c(1:20)){
+    a <- agrep(as.character(ligue1_teams[i,2]), df[,1], max.distance = 0.1, ignore.case = TRUE)
+    for (j in c(1:length(a))){
+      df[a[j],1] <- as.character(ligue1_teams[i,1])
+    }
+  }
+
+  write_csv(df,path = "C:/R Projects/webscraping/df.csv")
+  #costs = list(ins=1,del=1,sub=1),
 #}

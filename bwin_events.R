@@ -13,7 +13,7 @@ library(assertthat)
 
 bwin_events <- function(){
   
-  html<- read_html("https://sports.bwin.es/es/sports/search?query=Ligue%201")
+  html<- read_html("https://sports.bwin.fr/fr/sports/search?query=Ligue%201")
   
   matches <- html %>% html_nodes('.mb-option-button--3-way .mb-option-button__option-name') %>% html_text()
   odds <- html %>% html_nodes('.marketboard-options-row--3-way .mb-option-button__option-odds') %>% html_text() %>% as.numeric
