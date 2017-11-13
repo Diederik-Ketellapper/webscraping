@@ -29,17 +29,23 @@ df_betstars <- betstars_events()
 df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars) #We bind everything into one only dataset we will work in from now.
 rm(df_betstars,df_bwin,df_unibet,df_williamhill) # We remove the previous datasets to keep the environment clean.
 
-## We take out accents from the webscrapped names:
+## We take out accents from the webscrapped names (we use a loop since it's easier than other procedures due particularities of the iconv function):
 
-df[] <- df %>% lapply %>% iconv(from = 'UTF-8', to = 'ASCII//TRANSLIT')
-  
+for (i in c(1:40)){
+  for (j in c(1,2)){
+    df[i,j] <- iconv(df[i,j],from = 'UTF-8', to = 'ASCII//TRANSLIT')
+  }
+}
+
 ## We replace all the scrapped names in the data frame for the correct ones:
 ligue1_teams <- read.csv("ligue1_teams.csv") # Read files with Ligue 1 official team names
 
 for (i in c(1:40)){
   website <- agrep(df[i,6],colnames(ligue1_teams[1,]), max.distance = 0, ignore.case = TRUE)
-  b <- agrep(df[i,1],as.character(ligue1_teams[,website]), max.distance = 0, ignore.case = TRUE)
-  df[i,1] <- ligue1_teams[b,1]
+  for (j in c(1,2)){
+  b <- agrep(df[i,j],as.character(ligue1_teams[,website]), max.distance = 0, ignore.case = TRUE)
+  df[i,j] <- ligue1_teams[b,j]
+  }
 }
 
   write_csv(df,path = "C:/R Projects/webscraping/df.csv")

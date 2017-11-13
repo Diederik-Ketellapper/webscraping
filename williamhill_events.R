@@ -20,7 +20,7 @@ odds <- html %>% html_nodes('.eventprice') %>% html_text() %>% as.numeric
 
 ## Now we create a dataframe with the needed data:
 home <- sapply(strsplit(matches," "), `[`,1)
-visitor <- sapply(strsplit(matches," "), tail,1)
+visitor <- sapply(strsplit(matches," "), tail,1) %>% gsub(pattern = "[[:space:]]",replacement = "") #We take out the whitespaces we get in the webscrape
 oddh <- odds[seq(1,length(odds),3)]
 oddd <- odds[seq(2,length(odds),3)]
 oddv <- odds[seq(3,length(odds),3)]
