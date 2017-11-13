@@ -39,6 +39,8 @@ unibet_events <- function(){
   website <- rep("unibet", each = length(match))
   
   df <- data.frame(home, visitor, oddh, oddd, oddv,website)
+  ## Here we trim the data set to the first 10 rows, the next 10 scrapped are for the next journee:
+  df <- df[c(1:10),]
   
   return(df)
 }

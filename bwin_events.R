@@ -27,5 +27,8 @@ bwin_events <- function(){
   website <- rep("bwin", each = length(matches))
   
   df <- data.frame(home, visitor, oddh, oddd, oddv,website)
+  ## Here we trim the data set to the first 10 rows, because after those we are webscrapping future journees and other competitions events and since here are focusing on only Ligue 1 events we will disregard them:
+  df <- df[c(1:10),]
+  
   return(df)
 }

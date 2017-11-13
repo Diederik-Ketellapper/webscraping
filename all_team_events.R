@@ -31,9 +31,12 @@ library(dplyr)
   
   ## We bind all the dataframes in a unique one:
   
-  df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars)
+  df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars) #We bind everything into one only dataset we will work in from now.
+  rm(df_betstars,df_bwin,df_unibet,df_williamhill) # We remove the previous datasets to keep the environment clean.
   
   ## We replace all the scrapped names in the data frame for the correct ones:
+  ligue1_teams <- read.csv("ligue1_teams.csv") # Read files with Ligue 1 official team names
+  
   for (i in c(1:20)){
     a <- agrep(as.character(ligue1_teams[i,2]), df[,1], max.distance = 0.1, ignore.case = TRUE)
     for (j in c(1:length(a))){
