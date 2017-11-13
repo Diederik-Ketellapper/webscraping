@@ -13,7 +13,7 @@ library(assertthat)
 
 williamhill_events <- function(){
 
-html<- read_html("http://sports.williamhill.es/bet_esp/es/betting/t/312/Francia+-+Ligue+1.html")
+html<- read_html("http://sports.williamhill.com/bet/fr-fr/betting/t/312/France+-+Ligue+1.html")
 
 matches <- html %>% html_nodes('.rowOdd a span') %>% html_text()
 odds <- html %>% html_nodes('.eventprice') %>% html_text() %>% as.numeric
