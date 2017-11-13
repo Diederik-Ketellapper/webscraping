@@ -12,38 +12,35 @@ library(rvest)
 library(httr)
 library(dplyr)
 
-## We define the function to gather all the data from the different websites:
+## Now we are going to use the functions created separately to gather the data from each one:
 
-#all_team_events <- function(team){
-  
-  #assertthat this has to be a character
-  
-  ## Now we are going to use the functions created separately to gather the data from each one:
-  "williamhill_events.R" %>% source
-  "bwin_events.R" %>% source
-  "unibet_events.R" %>% source
-  "betstars_events.R" %>% source
+"williamhill_events.R" %>% source
+"bwin_events.R" %>% source
+"unibet_events.R" %>% source
+"betstars_events.R" %>% source
 
-  df_williamhill <- williamhill_events()
-  df_bwin <- bwin_events()
-  df_unibet <- unibet_events()
-  df_betstars <- betstars_events()
+df_williamhill <- williamhill_events()
+df_bwin <- bwin_events()
+df_unibet <- unibet_events()
+df_betstars <- betstars_events()
   
-  ## We bind all the dataframes in a unique one:
+## We bind all the dataframes in a unique one:
   
-  df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars) #We bind everything into one only dataset we will work in from now.
-  rm(df_betstars,df_bwin,df_unibet,df_williamhill) # We remove the previous datasets to keep the environment clean.
+df <- rbind(df_williamhill,df_bwin,df_unibet,df_betstars) #We bind everything into one only dataset we will work in from now.
+rm(df_betstars,df_bwin,df_unibet,df_williamhill) # We remove the previous datasets to keep the environment clean.
+
+## We take out accents from the webscrapped names:
+
+df[] <- df %>% lapply %>% iconv(from = 'UTF-8', to = 'ASCII//TRANSLIT')
   
-  ## We replace all the scrapped names in the data frame for the correct ones:
-  ligue1_teams <- read.csv("ligue1_teams.csv") # Read files with Ligue 1 official team names
-  
-  for (i in c(1:20)){
-    a <- agrep(as.character(ligue1_teams[i,2]), df[,1], max.distance = 0.1, ignore.case = TRUE)
-    for (j in c(1:length(a))){
-      df[a[j],1] <- as.character(ligue1_teams[i,1])
-    }
-  }
+## We replace all the scrapped names in the data frame for the correct ones:
+ligue1_teams <- read.csv("ligue1_teams.csv") # Read files with Ligue 1 official team names
+
+for (i in c(1:40)){
+  website <- agrep(df[i,6],colnames(ligue1_teams[1,]), max.distance = 0, ignore.case = TRUE)
+  b <- agrep(df[i,1],as.character(ligue1_teams[,website]), max.distance = 0, ignore.case = TRUE)
+  df[i,1] <- ligue1_teams[b,1]
+}
 
   write_csv(df,path = "C:/R Projects/webscraping/df.csv")
-  #costs = list(ins=1,del=1,sub=1),
 #}

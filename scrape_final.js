@@ -1,4 +1,4 @@
-var url ='https://www.bet365.es/#/AC/B1/C1/D13/E33754893/F2/R1/';
+var url ='https://www.betstars.fr/?no_redirect=1#/soccer/competitions/2152298';
 var page = new WebPage()
 var fs = require('fs');
 
@@ -11,5 +11,5 @@ function just_wait() {
     setTimeout(function() {
                fs.write('1.html', page.content, 'w');
             phantom.exit();
-    }, 2500);
+    }, 5000);
 }
