@@ -3,44 +3,62 @@ title: "Memory of the Project"
 output: html_notebook
 ---
 
-## The Big Ass Project: Webscraping
-# Preface
+# WEBSCARPPING THE TOP 4 BETTING WEBSITES IN EUROPE
+## Preface
 
 This project aims to showcase the adquired skills during the course MAP 351 Introduction to R of the master's degree MSc Data Science for Business. The main goals of this project is to use and implement the different R capabilities shown in class, but at the same time develop a tool which may have some practical interest. In that sense the topic of the project was open, and we decided to go for online betting in Europe. In this project we are going to use the decimal odds format, for more information about the different odds formats and what they mean the reader is encouraged to check: https://help.smarkets.com/hc/en-gb/articles/214071849-What-are-the-different-betting-odds-formats-
 
-# Introduction
+## Introduction
 
-On the past few years, online betting has experienced a boom that has lead to proliferation of website offering this service. The question that arises is then, there is any difference across all the webistes regarding the odds? Or all of them offer the same odd for a given bet and the main difference might be other services the different portals offer?
+On the past few years, online betting has experienced a boom that has lead to proliferation of websites offering this service. The question that arises is then, there is any difference across all the webistes regarding the odds? Or all of them offer the same odd for a given bet and the main difference might be other services the different portals offer?
 
-In order to give an answer to this question, the first thing to do is to analyze how odds are defined by bookmakers. We are going to make a really quick introduction on the mathematics of bookmaking, and we highly recommend the interested reader to check .
+In order to give an answer to this question, the first thing to do is to analyze how odds are defined by bookmakers. We are going to make a really quick introduction on the mathematics of bookmaking.
 
 To keep it simple the odds of a particular bet are defined by the bookmaker following these steps:
 
 1. Betting houses define which one they think is the real probability of the event happening based on the available data and their own algorithms. Putting it simple for a binary event like a coin toss we now that the probability of getting heads is 0.5, then the odd for this event is defined as 1 to 2 so if you bet 10 € and get heads you will obtain 20 €.
 
-2. Once the odd asociated with the real probability is defined, bookmakers add their own comission usually around 6% in the industry. Going back to the coin example with a 6% charges the odd will be 1.88 so the payout will go down to 18.8 € and your margin from 10 € to 8.8 €.
+2. Once the odd asociated with the real probability is defined, bookmakers add their own comission, which is usually around 6% in the industry. Going back to the coin example with a 6% charges the odd will be 1.88 so the payout will go down to 18.8 € and your margin from 10 € to 8.8 €.
 
-3. In order to ensure their profit, bookmakers adjust odds to attract bets in the right proportion in each side, in order to secure a profit regardless of the outcome of the event. This is achieved by offering odds that are higher than the actual statistical probability of the event concerned.
+3. In order to ensure their profit, bookmakers adjust odds to attract bets in the right proportion in each side, so they secure a profit regardless of the outcome of the event. This is achieved by offering odds that are higher than the actual statistical probability of the event concerned.
 
-With this being said, it can be seen that due to de odds defining process is unlikely that the odds of two different bookmakers will be exactly the same, first of all due to different comissions across bookmakers and most importantly due to the arbitrage applyied ensure profit by them that generates artificial odds from which we can take advantage.
+With this being said, it can be seen that due to de odds defining process is unlikely that the odds of two different bookmakers will be exactly the same. In order to help the bettor to take a more informed decision and place the bet with the best odd available we will develop a shiny app comparing the data from the 4 principal betting websites in Europe that will allow comparisions between odds offered.
 
-In order to help the bettor to take a more informed decision and place the bet with the best odd available we will develop a shiny app comparing the data from the 5 principal betting websites in Europe that will allow comparisions between odds offered and the calculated bookmaker's margin.
+As long as the goal of the project is to showcase the skills adquired during the course, and gathering the data for all sports and countries will take a lot of time, we have decided to only develop the app for football events, and in particular for the Ligue 1 team events only. So we will only work with the Ligue 1 matches of the next journée. We think that by doing this simplification the project does not lose any relevance and makes it makeable within the scope of the course.
 
 With the following project we aim to cover the following points of the course:
 
-+ Github: We are working online from Barcelona and Amsterdam
++ Github: We are working online from Barcelona and Amsterdam.
 + Shiny app: the results will be showcased in a shiny app.
-+ Web-scraping: use to collect odd data from the different websites.
-+ Data Manipulating and presenting: when dealing with the data from the different websites.
-+ Package making: the final result is pretended to be delivered as a package.
++ Web-scraping: used to collect odds data from the different websites.
++ Data Manipulating and presenting: when dealing with the data webscrapped data and cleaning and structuring it.
 
-# Betting websites selection
+## Betting websites selection
 
-According to the following ranking (http://www.infobookmakers2017.com/european-betting-sites.html) the main European betting sites are the following:
+According to several online rankings consulted, the main European betting sites are the following:
 
-+ BET365 with the following URL: https://www.bet365.es/#/HO/
-+ WILLIAM HILL with the following URL: http://sports.williamhill.es/bet_esp/es
-+ BETFAIR with the following URL: https://www.betfair.es/sport/
-+ 10BET with the following URL: https://www.10bet.com/sports/
-+ UNIBET with the following URL: https://www.unibet.co.uk/betting#home (input bar to insert team)
++ WILLIAM HILL -> http://sports.williamhill.com/bet/fr-fr/betting/t/312/France+-+Ligue+1.html
++ BWIN -> https://sports.bwin.fr/fr/sports/search?query=Ligue%201
++ BETSTARS -> https://www.betstars.fr/?no_redirect=1#/soccer/competitions/2152298
++ UNIBET -> https://www.unibet.fr/sport/football/ligue-1
 
+## FILES DEVELOPED
+
+This project can be divided in two parts with their respective files:
+
++ Main.R - Main script that calls the different webscraping functions, cleans the data and puts it in a data frame. It standarizes all the names of the teams with the UEFA official ones, as well as standarizes the encoding.
++ Webscraping functions - there is one for each website, of the form websitename_events.R. Each of these files contains a function that webscrapps all the matches and odds from the target website and returns a dataframe.
++ scrape_final.js - javascript used to enter the websites with the headless browser PhantomJS to skip the delayed rendering of some wesites. The executable of the browser(phantomjs.exe) is also in the folder and called by the script. It only works with Windows since the file of the browser is the windows version! We set the waiting time for the script to 5 seconds, as long as less time wasn't enough to skip the delay and gather the data. That's the main reason why this function takes a while to scrappe the data.
++APP - shinny app file.
+
+## Main problems encountered
+
+During the development of this project we had to overcome several technical problems, the most relevant ones from which we learn a lot are listed below:
+
++ WEBSCRAPPING: While during the webscrapping of the betting websites we managed to webscrappe william hill and bwin with the rvest package for R, but for unibet and betstars we keep on gathering empty data. After a indeep research on the internet of the causes behind that we discovered that some betting websites use a javascript delayed rendering and that was the main reason we where failing to gather anything. Using the following tutorial from r-Bloggers (https://www.r-bloggers.com/web-scraping-javascript-rendered-sites/) we managed to sort it out by using the headless browser PhantomJS and a java script that waits for 5 seconds before scrapping the content so it has time to get load.
+
++ CLEANING THE DATA: The data obtained from the different websites wasn't clean or structured and it' had to be tidyed up. In that sense there where two major complications:
+    - Team names where different across the websites: we solved it by downloading the UEFA     official names and comapring their Leveinstein distance with the scrapped ones so we could match it and replace them for the official ones. This has been done with a loop and agrep function.
+    - Some webscrapped names contained accents: to solve this we changed the encoding of the names from UTF-8 to ASCII//TRANSLIT using a loop. The main reason to use a loop and not lapply is the particularities of the function iconv and the change of encoding scheme that didn't make it possible.
+    
++ SHINY APP: Due to the time it takes to the main.R script to webscrape all the data due to the reasons explained above, we can't do the shiny app dynamic because it won't be nices. So it first gathers the data and then it displays it.
