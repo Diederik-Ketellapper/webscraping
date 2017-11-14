@@ -11,14 +11,9 @@ library(shiny)
 library(glue)
 library(DT)
 
-
+wd <- getwd()
 options(stringsAsFactors = FALSE)
-wd<-getwd()
-
-glue("{wd}/Overview/tests.R") %>% as.character %>% source
-
-
-
+source("main.R") # Run the webscrapping script to get the data needed.
 
 # UI
 ui <- fluidPage(
@@ -28,7 +23,7 @@ titlePanel("Which site to bet on for your favorite team?"),
 helpText('By: Eric Brea and Diederik Ketellapper '),
  ### Input is here. The source of the names is FIFA
 sidebarPanel(selectInput("team", "Team:",
-              list(`Ligue1` = ligue1))),
+              list(`Ligue1` = ligue1_teams[,1]))),
 mainPanel(
   tabsetPanel(
     # The main plot is here
@@ -59,7 +54,7 @@ server <- function(input, output,session){
     oddv2<-function(){df()$oddv %>% unique() %>% sort(decreasing = TRUE) %>% nth(2)}
 ### Render the datatable here because of the fact that DT R integration is not 100% perfect slight work around    
     output$data <- renderDataTable({
-     datatable(df(),options = list(dom = 't'),rownames = FALSE) %>% 
+     datatable(df(),options = list(dom = 't'),rownames = FALSE, colnames = c("Home","Visitor","Home Wins","Draw","Visitor Wins","Website")) %>% 
       formatStyle('oddh', backgroundColor = styleInterval(oddh2(), c('white', 'green')))  %>% 
       formatStyle('oddd', backgroundColor = styleInterval(oddd2(), c('white', 'green'))) %>% 
       formatStyle('oddv', backgroundColor = styleInterval(oddv2(), c('white', 'green'))) %>% 
