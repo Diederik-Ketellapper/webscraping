@@ -31,7 +31,9 @@ sidebarPanel(selectInput("team", "Team:",
               list(`Ligue1` = ligue1))),
 mainPanel(
   tabsetPanel(
+    # The main plot is here
     tabPanel("Plot", dataTableOutput("data")), 
+    # Here we have the FAQ just some text boxes and an htlml link
     tabPanel("Help",  
       h3("FAQ"),
       p("Q: Are all operating systems supported?"), 
@@ -41,15 +43,21 @@ mainPanel(
       wellPanel(helpText(a("Still need help?",href="mailto:Eric.Brea-Garcia@polytechnique.edu?subject=Ligue 1 Webscraping Question", target="_blank")))
 ))))
 
-
-# Define server logic required to draw a histogram
-server <- function(input, output){
-
-  
-  output$data <- renderDataTable(read.csv(glue("{wd}/df.csv"), col.names = c("Home","Visitor","1","X","2","Website"), check.names = FALSE) %>% 
-      subset(Visitor == input$team | Home == input$team)
-      
-      , options = list(dom = 't'),rownames = FALSE)
+server <- function(input, output,session){
+#output$
+    df<-reactive({read.csv(glue("{wd}/df.csv")) %>% 
+      subset(visitor == input$team | home == input$team)})
+    
+    oddh2<-function(){df()$oddh %>% unique() %>% sort(decreasing = TRUE) %>% nth(2)}
+    oddd2<-function(){df()$oddd %>% unique() %>% sort(decreasing = TRUE) %>% nth(2)}
+    oddv2<-function(){df()$oddv %>% unique() %>% sort(decreasing = TRUE) %>% nth(2)} 
+    output$data <- renderDataTable({
+     datatable(df(),options = list(dom = 't'),rownames = FALSE) %>% 
+      formatStyle('oddh', backgroundColor = styleInterval(oddh2(), c('white', 'green')))  %>% 
+      formatStyle('oddd', backgroundColor = styleInterval(oddd2(), c('white', 'green'))) %>% 
+      formatStyle('oddv', backgroundColor = styleInterval(oddv2(), c('white', 'green'))) %>% 
+      formatStyle(c('home','visitor','website'), backgroundColor = 'white') 
+    })
 }
 
 # Run the application 
