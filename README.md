@@ -13,15 +13,20 @@ Usually the odds of a particular bet are defined by the bookmaker following thes
 Betting houses define which one they think is the real probability of the event happening based on the available data and their own algorithms. Simplifying for a binary event like a coin toss we now that the probability of getting heads is 0.5, then the odd for this event is defined as 1 to 2 so if you bet 10 € and get heads you will obtain 20 €. 
 
 Once the odd asociated with the real probability is defined, bookmakers add their own commission, which hovers around 6% in the industry. Going back to the coin example with a 6% charges the odd will be 1.88 so the payout will go down to 18.8 € and your margin from 10 € to 8.8 €.
+
 In order to ensure their profit, bookmakers adjust odds to attract bets in the right proportion in each side, so they secure a profit regardless of the outcome of the event. This is achieved by offering odds that are higher than the actual statistical probability of the event concerned.
+
 With this being said, it can be seen that due to de odds defining process is unlikely that the odds of two different bookmakers will be exactly the same. In order to help the bettor to take a more informed decision and place the bet with the best odd available we will develop a shiny app comparing the data from the 4 principal betting websites in Europe that will allow comparisions between odds offered.
 As we just want to showcase the skills adquired during the course, and gathering the data for all sports and countries will take a lot of time, we have decided to only develop the app for football events, and in particular for the Ligue 1 team events only. So we will only work with the Ligue 1 matches of the next journée. We think that by doing this simplification the project does not lose any relevance and makes it makeable within the scope of the course.
+
+### Course Learnings
 With the following project we aim to cover the following points of the course:
-Github: We are working online from Barcelona and Amsterdam.
-Shiny app: the results will be showcased in a shiny app.
-Web-scraping: used to collect odds data from the different websites.
-Data Manipulating and presenting: when dealing with the data webscrapped data and cleaning and structuring it.
-Betting websites selection
+1. Github: We are working online from Barcelona and Amsterdam.
+2. Shiny app: the results will be showcased in a shiny app.
+3. Web-scraping: used to collect odds data from the different websites.
+4. Data Manipulating and presenting: when dealing with the data webscrapped data and cleaning and structuring it.
+
+### Betting websites selection
 According to several online rankings consulted, the main European betting sites are the following:
 
 WILLIAM HILL -> http://sports.williamhill.com/bet/fr-fr/betting/t/312/France+-+Ligue+1.html
